@@ -46,7 +46,7 @@ export const validateLoginForm = (email, password) => {
 
 export const validateRegisterForm = (formData, role) => {
   const errors = {};
-  const { fullName, email, password, confirmPassword, mobile } = formData;
+  const { fullName, email, password, confirmPassword, mobile, companyName, website } = formData;
   
   if (!fullName || fullName.trim() === '') {
     errors.fullName = 'Full name is required';
@@ -78,6 +78,15 @@ export const validateRegisterForm = (formData, role) => {
   
   if (role === 'candidate' && mobile && !isValidPhone(mobile)) {
     errors.mobile = 'Please enter a valid phone number (e.g., +1-555-0123)';
+  }
+  
+  if (role === 'employer') {
+    if (!companyName || companyName.trim() === '') {
+      errors.companyName = 'Company name is required';
+    }
+    if (website && !isValidURL(website)) {
+      errors.website = 'Please enter a valid URL (e.g., https://example.com)';
+    }
   }
   
   return { isValid: Object.keys(errors).length === 0, errors };

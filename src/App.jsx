@@ -16,6 +16,7 @@ import CreateJobPage from './pages/CreateJobPage';
 import InterviewPage from './pages/InterviewPage';
 import ReportPage from './pages/ReportPage';
 import NotFoundPage from './pages/NotFoundPage';
+import JobsPage from './pages/JobsPage';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/jobs" element={<JobsPage />} />
 
                     {/* Protected Routes - Employer */}
                     <Route element={<ProtectedRoute allowedRoles={['employer']} />}>

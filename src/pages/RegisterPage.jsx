@@ -10,6 +10,7 @@ import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorAlert } from '../components/common/Alert';
 import { authService } from '../services/auth';
 import { candidatesService } from '../services/candidates';
+import { employersService } from '../services/employers';
 import { validateRegisterForm, validateCandidateForm } from '../utils/validators';
 import { parseError } from '../utils/errorHandler';
 import { USER_ROLES } from '../utils/constants';
@@ -32,6 +33,8 @@ export default function RegisterPage() {
     password: '',
     confirmPassword: '',
     mobile: '',
+    companyName: '',
+    website: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -66,11 +69,20 @@ export default function RegisterPage() {
       setLoading(true);
 
       if (role === 'employer') {
-        // Register employer
+        // Register employer first
+        const employerData = {
+          company_name: formData.companyName,
+          website: formData.website || '',
+          contact_email: formData.email
+        };
+        const newEmployer = await employersService.create(employerData);
+
+        // Register user
         const registrationData = {
           full_name: formData.fullName,
           email: formData.email,
           password: formData.password,
+          employer_id: newEmployer.id,
           role: USER_ROLES.EMPLOYER,
         };
 
@@ -226,6 +238,31 @@ export default function RegisterPage() {
                 icon={Mail}
                 required
               />
+
+              {role === 'employer' && (
+                <>
+                  <Input
+                    label="Company Name"
+                    type="text"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                    error={errors.companyName}
+                    placeholder="Tech Corp"
+                    icon={Briefcase}
+                    required
+                  />
+                  <Input
+                    label="Company Website (Optional)"
+                    type="url"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    error={errors.website}
+                    placeholder="https://techcorp.com"
+                  />
+                </>
+              )}
 
               {role === 'candidate' && (
                 <Input

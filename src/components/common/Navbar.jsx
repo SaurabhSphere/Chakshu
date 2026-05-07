@@ -33,6 +33,12 @@ export const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
+            <button
+              onClick={() => navigate('/jobs')}
+              className="text-secondary-700 hover:text-primary-600 transition-colors font-medium"
+            >
+              Browse Jobs
+            </button>
             {isAuthenticated && user?.role === 'employer' && (
               <>
                 <button

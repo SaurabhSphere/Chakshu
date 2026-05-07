@@ -53,7 +53,7 @@ export default function CreateJobPage() {
       setLoading(true);
 
       const jobData = {
-        employer_id: user?.id,
+        employer_id: user?.employer_id,
         title: formData.title,
         department: formData.department,
         job_description: formData.description,

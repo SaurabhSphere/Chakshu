@@ -12,6 +12,11 @@ export const interviewsService = {
     return response.data.data;
   },
 
+  listSessions: async (params = {}) => {
+    const response = await api.get('/api/interview-sessions', { params });
+    return response.data.data;
+  },
+
   startSession: async (sessionId) => {
     const response = await api.patch(`/api/interview-sessions/${sessionId}/start`);
     return response.data.data;
@@ -27,6 +32,16 @@ export const interviewsService = {
     return response.data.data;
   },
 
+  deleteSession: async (sessionId) => {
+    const response = await api.delete(`/api/interview-sessions/${sessionId}`);
+    return response.data.data;
+  },
+
+  getInterviewsForApp: async (appId) => {
+    const response = await api.get(`/api/applications/${appId}/interviews`);
+    return response.data.data;
+  },
+
   // Interview Questions
   addQuestion: async (sessionId, questionData) => {
     const response = await api.post(`/api/interview-sessions/${sessionId}/questions`, questionData);
@@ -38,9 +53,29 @@ export const interviewsService = {
     return response.data.data;
   },
 
+  getQuestion: async (questionId) => {
+    const response = await api.get(`/api/interview-questions/${questionId}`);
+    return response.data.data;
+  },
+
+  updateQuestion: async (questionId, questionData) => {
+    const response = await api.put(`/api/interview-questions/${questionId}`, questionData);
+    return response.data.data;
+  },
+
+  deleteQuestion: async (questionId) => {
+    const response = await api.delete(`/api/interview-questions/${questionId}`);
+    return response.data.data;
+  },
+
   // Interview Answers
   submitAnswer: async (questionId, answerData) => {
     const response = await api.post(`/api/interview-questions/${questionId}/answers`, answerData);
+    return response.data.data;
+  },
+
+  getAnswer: async (answerId) => {
+    const response = await api.get(`/api/interview-answers/${answerId}`);
     return response.data.data;
   },
 
@@ -49,14 +84,8 @@ export const interviewsService = {
     return response.data.data;
   },
 
-  // Reports
-  generateReport: async (sessionId, reportData) => {
-    const response = await api.post(`/api/interview-sessions/${sessionId}/generate-report`, reportData);
-    return response.data.data;
-  },
-
-  getReport: async (sessionId) => {
-    const response = await api.get(`/api/interview-sessions/${sessionId}/report`);
+  getSessionAnswers: async (sessionId) => {
+    const response = await api.get(`/api/interview-sessions/${sessionId}/answers`);
     return response.data.data;
   },
 };

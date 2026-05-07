@@ -25,4 +25,9 @@ export const candidatesService = {
     const response = await api.put(`/api/candidates/${candidateId}`, candidateData);
     return response.data.data;
   },
+
+  delete: async (candidateId) => {
+    const response = await api.delete(`/api/candidates/${candidateId}`);
+    return response.data.data;
+  },
 };

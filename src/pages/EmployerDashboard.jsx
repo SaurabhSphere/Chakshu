@@ -24,8 +24,8 @@ export default function EmployerDashboard() {
   const fetchJobs = async () => {
     try {
       setLoading(true);
-      const data = await jobsService.list({ limit: 10, offset: 0 });
-      setJobs(Array.isArray(data) ? data : []);
+      const data = await jobsService.list({ limit: 10, offset: 0, employer_id: user?.id });
+      setJobs(data?.items || []);
     } catch (error) {
       addToast(parseError(error), 'error');
     } finally {

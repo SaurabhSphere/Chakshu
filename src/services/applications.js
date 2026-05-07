@@ -27,4 +27,19 @@ export const applicationsService = {
     const response = await api.put(`/api/applications/${applicationId}`, applicationData);
     return response.data.data;
   },
+
+  delete: async (applicationId) => {
+    const response = await api.delete(`/api/applications/${applicationId}`);
+    return response.data.data;
+  },
+
+  getByJob: async (jobId, params = {}) => {
+    const response = await api.get(`/api/applications/job/${jobId}`, { params });
+    return response.data.data;
+  },
+
+  getByCandidate: async (candidateId, params = {}) => {
+    const response = await api.get(`/api/applications/candidate/${candidateId}`, { params });
+    return response.data.data;
+  },
 };
