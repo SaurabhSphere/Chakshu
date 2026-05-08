@@ -14,6 +14,7 @@ import RegisterPage from './pages/RegisterPage';
 import EmployerDashboard from './pages/EmployerDashboard';
 import CreateJobPage from './pages/CreateJobPage';
 import InterviewPage from './pages/InterviewPage';
+import InterviewMonitor from './pages/InterviewMonitor';
 import ReportPage from './pages/ReportPage';
 import NotFoundPage from './pages/NotFoundPage';
 import JobsPage from './pages/JobsPage';
@@ -46,6 +47,7 @@ function App() {
                     {/* Protected Routes - Candidate */}
                     <Route element={<ProtectedRoute allowedRoles={['candidate']} />}>
                       <Route path="/candidate/interview/:sessionId" element={<InterviewPage />} />
+                      <Route path="/candidate/interview-monitor/:sessionId" element={<InterviewMonitor />} />
                     </Route>
 
                     {/* Fallback */}
